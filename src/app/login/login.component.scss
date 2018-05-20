@@ -1,0 +1,32 @@
+
+.intro-2 {
+    background: url("../../assets/img/abstract-blue-concrete.jpg")no-repeat center center;
+    background-size: cover;
+}
+.view {
+    height: 100vh !important;
+}
+@media (max-width: 768px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #ff8a65 !important;
+    } 
+    .intro-np {
+        display: none;
+    }
+}
+@media (min-width: 768px) {
+    .login-as-guest {
+        display: none;
+    }
+}
+h6 {
+    line-height: 1.7;
+}
+@media (max-width: 740px) {
+    .full-height,
+    .full-height body,
+    .full-height header,
+    .full-height header .view {
+        height: 1150px; 
+    } 
+}
