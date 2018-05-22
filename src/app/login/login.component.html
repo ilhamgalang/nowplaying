@@ -1,11 +1,11 @@
 <header class="ld-over" [ngClass]="{'running':loading}">
     <div class="ld ld-ring ld-spin"></div>
              
-    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark blue-grey darken-4 scrolling-navbar intro-fixed-nav wow slideInDown" data-wow-delay="0.6s">
+    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark blue-grey darken-4 scrolling-navbar intro-fixed-nav wow slideInDown" data-wow-delay="0.4s">
         <logo>
-            <a class="navbar-brand wow fadeInLeft" data-wow-delay="0.8s" href="#">
+            <a class="navbar-brand wow fadeInLeft" data-wow-delay="0.5s" href="#">
                 <img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" height="30" class="d-inline-block align-top" alt=""> 
-                Now Playing
+                Now Playing 
             </a>
         </logo>
     </mdb-navbar>
@@ -17,11 +17,11 @@
                     <div class="row flex-center pt-5 mt-3">
                         <div class="col-md-6 text-center text-md-left mb-5 intro-np">
                             <div class="white-text">
-                                <h1 class="display-4 wow fadeInLeft" data-wow-delay="0.8s">Now Playing</h1>
-                                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.5s">
-                                <h6 class="wow fadeInLeft" data-wow-delay="0.7s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae, quisquam iste.</h6>
+                                <h1 class="display-4 wow fadeInLeft" data-wow-delay="0.6s">Now Playing</h1>
+                                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                                <h6 class="wow fadeInLeft" data-wow-delay="0.5s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae, quisquam iste.</h6>
                                 <br>
-                                <button type="button" class="btn btn-info wow fadeInLeft waves-light" data-wow-delay="0.9s" mdbWavesEffect>Try? Login as Guest</button>
+                                <button type="button" class="btn btn-info wow fadeInLeft waves-light" data-wow-delay="0.7s" (click)="loginAsGuest()" mdbWavesEffect>Try? Login as Guest</button>
                             </div>
                         </div>
                         
@@ -30,36 +30,36 @@
                             <div [ngClass]="{'hide':!isHaveAccount}" class="form-login card wow zoomIn clearfix" data-wow-delay="0.3s">
                                 <div class="card-body z-depth-2">
                                     <!--Header-->
-                                    <div class="text-center wow zoomIn" data-wow-delay="0.8s">
+                                    <div class="text-center wow zoomIn" data-wow-delay="0.4s">
                                         <h3 class="blue-text"><i class="fa fa-laptop"></i> LOGIN</h3>
                                         <hr class="pb-3">
                                     </div>
 
                                     <!--Body-->
-                                    <form [formGroup]="loginForm" (ngSubmit)="cekLogin()" >
-                                        <div class="md-form wow zoomIn" data-wow-delay="0.8s">
+                                    <form [formGroup]="loginForm" (ngSubmit)="cekLogin()">
+                                        <div class="md-form wow zoomIn" data-wow-delay="0.6s">
                                             <i class="fa fa-user prefix grey-text"></i>
                                             <input type="text" id="form-username" class="form-control" formControlName="username" mdbInputDirective>
                                             <label for="form-username">Username</label>
                                         </div>
-                                        <div class="md-form wow zoomIn" data-wow-delay="0.8s">
+                                        <div class="md-form wow zoomIn" data-wow-delay="0.6s">
                                             <i class="fa fa-lock prefix grey-text"></i>
                                             <input type="password" id="form-password" class="form-control" formControlName="password" mdbInputDirective>
                                             <label for="form-password">Password</label>
                                         </div>
 
-                                        <div class="text-center wow zoomIn" data-wow-delay="0.8s">
+                                        <div class="text-center wow zoomIn" data-wow-delay="0.6s">
                                             <button type="submit" class="btn btn-primary waves-light" mdbWavesEffect><i class="fa fa-sign-in mr-1"></i> Login </button>
                                         </div>
                                     </form>
                                     <hr>
-                                    <div class="text-center blue-grey-text wow zoomIn" data-wow-delay="0.8s">
+                                    <div class="text-center blue-grey-text wow zoomIn" data-wow-delay="0.6s">
                                         Don't Have an Account?
                                         <button type="button" class="btn btn-outline-primary" mdbWavesEffect (click)="buttonRegister()"><i class="fa fa-retweet mr-1"></i> Register </button>
                                         <div class="login-as-guest"> 
                                             OR
                                             <br>
-                                            <button type="button" class="btn btn-outline-primary" mdbWavesEffect><i class="fa fa-user mr-1"></i> Login As Guest </button>
+                                            <button type="button" class="btn btn-outline-primary" (click)="loginAsGuest()" mdbWavesEffect><i class="fa fa-user mr-1"></i> Login As Guest </button>
                                         </div>
                                     </div>
 
@@ -70,32 +70,34 @@
                             <div [ngClass]="{'hide':!isDontHaveAccount}" class="form-register card wow zoomIn clearfix" data-wow-delay="0.3s">
                                 <div class="card-body z-depth-2">
                                    <!--Header-->
-                                    <div class="text-center wow zoomIn" data-wow-delay="0.8s">
+                                    <div class="text-center wow zoomIn" data-wow-delay="0.6s">
                                         <h3 class="blue-text"><i class="fa fa-laptop"></i> REGISTER</h3>
                                         <hr>
                                     </div>
                             
                                     <!--Body-->
-                                    <div class="md-form wow zoomIn" data-wow-delay="0.8s">
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <input type="text" id="form-username" class="form-control" mdbInputDirective>
-                                        <label for="form-username">Username</label>
-                                    </div>
-                                    <div class="md-form wow zoomIn" data-wow-delay="0.8s">
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <input type="text" id="form-name" class="form-control" mdbInputDirective>
-                                        <label for="form-name">Name</label>
-                                    </div>
-                                    <div class="md-form wow zoomIn" data-wow-delay="0.8s">
-                                        <i class="fa fa-lock prefix grey-text"></i>
-                                        <input type="password" id="form-password" class="form-control" mdbInputDirective>
-                                        <label for="form-password">Password</label>
-                                    </div>
-                                    
-                                    <div class="text-center wow zoomIn" data-wow-delay="0.8s">
-                                        <button type="button" class="btn btn-primary waves-light" mdbWavesEffect><i class="fa fa-sign-in mr-1"></i> Sign Up </button>
-                                        <button type="button" class="btn btn-secondary waves-light" mdbWavesEffect (click)="buttonBackRegister()"><i class="fa fa-arrow-left mr-1"></i> Back </button>
-                                    </div>
+                                    <form [formGroup]="registerForm" (ngSubmit)="register()">
+                                        <div class="md-form wow zoomIn" data-wow-delay="0.6s">
+                                            <i class="fa fa-user prefix grey-text"></i>
+                                            <input type="text" id="form-username" class="form-control" formControlName="username" mdbInputDirective>
+                                            <label for="form-username">Username</label>
+                                        </div>
+                                        <div class="md-form wow zoomIn" data-wow-delay="0.6s">
+                                            <i class="fa fa-user prefix grey-text"></i>
+                                            <input type="text" id="form-name" class="form-control" formControlName="nama_user" mdbInputDirective>
+                                            <label for="form-name">Name</label>
+                                        </div>
+                                        <div class="md-form wow zoomIn" data-wow-delay="0.6s">
+                                            <i class="fa fa-lock prefix grey-text"></i>
+                                            <input type="password" id="form-password" class="form-control" formControlName="password" mdbInputDirective>
+                                            <label for="form-password">Password</label>
+                                        </div>
+                                        
+                                        <div class="text-center wow zoomIn" data-wow-delay="0.6s">
+                                            <button type="submit" class="btn btn-primary waves-light" mdbWavesEffect><i class="fa fa-sign-in mr-1"></i> Sign Up </button>
+                                            <button type="button" class="btn btn-secondary waves-light" mdbWavesEffect (click)="buttonBackRegister()"><i class="fa fa-arrow-left mr-1"></i> Back </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!--/.Form-->

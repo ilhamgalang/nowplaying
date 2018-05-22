@@ -19,5 +19,11 @@ export class ListApiService {
         return result;
     }
 
+    postUser(data: Object): Observable<any> {
+        let result: Observable<Object>;
+            result = this.http.post(this.API + 'user/create', data);
+        return result;
+    }
+
 }
 
