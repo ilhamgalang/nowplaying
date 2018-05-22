@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ListApiService } from '../list-api/list-api.service';
 import { Router } from '@angular/router';
 
@@ -21,20 +21,23 @@ export class LoginComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private listApiService: ListApiService, private router: Router) {
-    this.isDontHaveAccount = false;
-    this.isHaveAccount = true;
+  constructor(
+    private listApiService: ListApiService,
+    private router: Router,
+    private fb: FormBuilder) {
+      this.isDontHaveAccount = false;
+      this.isHaveAccount = true;
   }
 
   ngOnInit() {
-    this.loginForm = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl()
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
-    this.registerForm = new FormGroup({
-      username: new FormControl(),
-      nama_user: new FormControl(),
-      password: new FormControl()
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
+      nama_user: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -42,7 +45,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.value.username = 'guest';
     this.loginForm.value.password = '';
     this.cekLogin();
-    this.alertMessage('info', "You're Login As Guest!");
+    this.alertMessage('info', 'You\'re Login As Guest!');
   }
 
   cekLogin() {
