@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ListApiService } from '../list-api/list-api.service';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,6 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   registerForm: FormGroup;
-
-  loading: boolean;
 
   constructor(
     private listApiService: ListApiService,
@@ -49,7 +48,6 @@ export class LoginComponent implements OnInit {
   }
 
   cekLogin() {
-    this.startLoading();
     this.listApiService.getCekLogin(this.loginForm.value).subscribe(data => {
       this.dataUser = data;
       console.log(this.dataUser['status']);
@@ -60,11 +58,9 @@ export class LoginComponent implements OnInit {
         this.alertMessage('error', 'Wrong Username Or Password');
       }
     });
-    this.endLoading();
   }
 
   register() {
-    this.startLoading();
     this.listApiService.postUser(this.registerForm.value).subscribe(data => {
       this.dataUser = data;
       console.log(this.dataUser);
@@ -75,7 +71,6 @@ export class LoginComponent implements OnInit {
         this.alertMessage('error', this.dataUser['message']);
       }
     });
-    this.endLoading();
   }
 
   buttonBackRegister() {
@@ -88,16 +83,8 @@ export class LoginComponent implements OnInit {
     this.isHaveAccount = false;
   }
 
-  startLoading() {
-    this.loading = true;
-  }
-
-  endLoading() {
-    this.loading = false;
-  }
-
   alertMessage(mtype: any, mtitle: any) {
-    const toast = swal.mixin({
+    const toast = swal['mixin']({
       toast: true,
       position: 'bottom-end',
       showConfirmButton: false,
@@ -108,4 +95,19 @@ export class LoginComponent implements OnInit {
       title: mtitle
     });
   }
+
+  alertMessageNull(mtype: any, mtitle: any) {
+    const toast = swal['mixin']({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      animation: false,
+      timer: 500
+    });
+    toast({
+      type: mtype,
+      title: mtitle
+    });
+  }
+
 }

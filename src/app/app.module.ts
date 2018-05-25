@@ -31,7 +31,7 @@ import { HomeComponent } from './home/home.component';
       confirmButtonClass: 'btn btn-outline-success',
       cancelButtonClass: 'btn btn-outline-danger'
     }),
-	NgbModule.forRoot()
+  NgbModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ListApiService],
