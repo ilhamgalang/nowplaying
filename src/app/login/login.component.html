@@ -79,21 +79,31 @@
                                     </div>
                             
                                     <!--Body-->
-                                    <form [formGroup]="registerForm" (ngSubmit)="register()">
+                                    <form [formGroup]="registerForm" (ngSubmit)="registerForm.controls['username'].errors?.required || registerForm.controls['password'].errors?.required || registerForm.controls['nama_user'].errors?.required || registerForm.controls['password'].errors?.minlength ? alertMessage('error', 'Username, Name Or Password Can\'t Empty') : register()">
                                         <div class="md-form wow zoomIn" data-wow-delay="0.6s">
                                             <i class="fa fa-user prefix grey-text"></i>
                                             <input type="text" id="form-username" class="form-control" formControlName="username" mdbInputDirective>
                                             <label for="form-username">Username</label>
+                                            <div *ngIf="registerForm.controls['username'].touched">
+                                                <div *ngIf="registerForm.controls['username'].errors?.required ? alertMessageNull('error', 'Username can\'t Empty') : null"></div>
+                                            </div>                                    
                                         </div>
                                         <div class="md-form wow zoomIn" data-wow-delay="0.6s">
                                             <i class="fa fa-user prefix grey-text"></i>
                                             <input type="text" id="form-name" class="form-control" formControlName="nama_user" mdbInputDirective>
                                             <label for="form-name">Name</label>
+                                            <div *ngIf="registerForm.controls['nama_user'].touched">
+                                                <div *ngIf="registerForm.controls['nama_user'].errors?.required ? alertMessageNull('error', 'Name can\'t Empty') : null"></div>
+                                            </div>                                    
                                         </div>
                                         <div class="md-form wow zoomIn" data-wow-delay="0.6s">
                                             <i class="fa fa-lock prefix grey-text"></i>
                                             <input type="password" id="form-password" class="form-control" formControlName="password" mdbInputDirective>
                                             <label for="form-password">Password</label>
+                                            <div *ngIf="registerForm.controls['password'].touched">
+                                                    <div *ngIf="registerForm.controls['password'].errors?.required ? alertMessageNull('error', 'Password Can\'t Empty') : null"></div>
+                                                    <div *ngIf="registerForm.controls['password'].errors?.minlength ? alertMessageNull('error', 'Password MinLength = 8') : null"></div>                                 
+                                            </div>
                                         </div>
                                         
                                         <div class="text-center wow zoomIn" data-wow-delay="0.6s">
