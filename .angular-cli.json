@@ -29,7 +29,8 @@
       "scripts": [
         "../node_modules/chart.js/dist/Chart.js",
         "../node_modules/hammerjs/hammer.min.js",
-        "./assets/js/sweetalert2.all.js"
+        "./assets/js/sweetalert2.all.js",
+        "./assets/js/jquery-3.3.1.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -6,3 +6,9 @@
 .hide {
     display: none;
 }
+
+@media (min-width: 650px) {
+    main {
+        margin-left: 60px;
+    }
+}

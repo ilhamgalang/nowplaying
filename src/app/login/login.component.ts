@@ -110,4 +110,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  getDataUser() {
+    return this.dataUser;
+  }
+
 }
