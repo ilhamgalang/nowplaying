@@ -4,14 +4,14 @@
     <i></i>
   </label>
     <nav class="primnav primary-color">
-      <ul>
+      <ul *ngIf="dataUser['level'] == 2">
         <li>
-          <a title="Home" href="#dashboard">
-            <i class="icon fa fa-home fa-2x" aria-hidden="true"></i> HOME
+          <a title="Home" routerLink="/home">
+            <i class="icon fa fa-home fa-2x" aria-hidden="true"></i> HOME {{dataUser['level']}}
           </a>
         </li>
         <li>
-          <a title="Music" href="#mail">
+          <a title="Music"  routerLink="/tes">
             <i class="icon fa fa-music fa-2x" aria-hidden="true"></i> Mail
             <div class="tag">53</div>
           </a>
@@ -25,14 +25,35 @@
           </ul>
         </li>
       </ul>
-    </nav>
-  
+      <ul *ngIf="dataUser['level'] == 1">
+          <li>
+            <a title="Home" routerLink="/home">
+              <i class="icon fa fa-home fa-2x" aria-hidden="true"></i> HOME {{dataUser['level']}}
+            </a>
+          </li>
+          <li>
+            <a title="Music"  routerLink="/tes">
+              <i class="icon fa fa-music fa-2x" aria-hidden="true"></i> Mail
+              <div class="tag">53</div>
+            </a>
+            <ul class="secnav">
+              <li>
+                <a title="Inbox" href="#inbox">Inbox</a>
+              </li>
+              <li>
+                <a title="Sent" href="#sent">Sent</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    
   <user id="user">
     <section>
-      <img src="../assets/img/avatar-user/default-user.png"/>
+      <img src="{{dataUser['photo']}}" />
       <section>
-        <name>Sarah Dekhard</name>
-        <actions><a href="#settings">settings</a> | <a routerLink="/login">logout</a></actions>
+        <name>{{dataUser['nama_user']}}</name>
+        <actions><a href="#settings">Settings</a> | <a (click)="logout()">Logout</a></actions>
       </section>
     </section>
   </user>

@@ -13,6 +13,12 @@ export class ListApiService {
         return this.http.get(this.API + 'user/read');
     }
 
+    getUserById(id: string): Observable<any> {
+        let result: Observable<Object>;
+            result = this.http.get(this.API + 'user/read?id_user=' + id);
+        return result;
+    }
+
     getCekLogin(data: Object): Observable<any> {
         let result: Observable<Object>;
             result = this.http.post(this.API + 'user/cekLogin', data);

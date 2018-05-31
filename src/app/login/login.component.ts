@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ListApiService } from '../list-api/list-api.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
+import { DataUserService } from '../service/data-user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,6 @@ import swal from 'sweetalert2';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   msg: any;
   dataUser: Object;
 
@@ -21,14 +22,15 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(
+    private cookieService: CookieService,
     private listApiService: ListApiService,
     private router: Router,
-    private fb: FormBuilder) {
-      this.isDontHaveAccount = false;
-      this.isHaveAccount = true;
-  }
+    private fb: FormBuilder,
+    private dataUserService: DataUserService) { }
 
   ngOnInit() {
+    this.isDontHaveAccount = false;
+    this.isHaveAccount = true;
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -50,8 +52,9 @@ export class LoginComponent implements OnInit {
   cekLogin() {
     this.listApiService.getCekLogin(this.loginForm.value).subscribe(data => {
       this.dataUser = data;
-      console.log(this.dataUser['status']);
       if (this.dataUser['status'] === 1) {
+        this.cookieService.set('cIdUser', this.dataUser['data'][0]['id_user']);
+        this.dataUserService.setDataUser(this.dataUser['data'][0]);
         this.router.navigate(['home']);
       } else {
         this.loginForm.reset();
@@ -108,10 +111,6 @@ export class LoginComponent implements OnInit {
       type: mtype,
       title: mtitle
     });
-  }
-
-  getDataUser() {
-    return this.dataUser;
   }
 
 }
