@@ -7,15 +7,17 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 
+import { ListApiService } from './service/list-api.service';
+import { DataUserService } from './service/data-user.service';
+import { AlertPopupService } from './service/alert-popup.service';
+import { TesComponent } from './tes/tes.component';
+
 import { AppRoutingModule } from './/app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
-import { ListApiService } from './list-api/list-api.service';
-import { DataUserService } from './service/data-user.service';
-import { TesComponent } from './tes/tes.component';
+import { AdminUserComponent } from './admin-user/admin-user.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { TesComponent } from './tes/tes.component';
     HomeComponent,
     NavbarComponent,
     TesComponent,
+    AdminUserComponent,
 ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { TesComponent } from './tes/tes.component';
   NgbModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ListApiService, CookieService, DataUserService],
+  providers: [ListApiService, CookieService, DataUserService, AlertPopupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

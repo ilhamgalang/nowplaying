@@ -7,7 +7,13 @@
       <ul *ngIf="dataUser['level'] == 2">
         <li>
           <a title="Home" routerLink="/home">
-            <i class="icon fa fa-home fa-2x" aria-hidden="true"></i> HOME {{dataUser['level']}}
+            <i class="icon fa fa-home fa-2x" aria-hidden="true"></i> Home
+          </a>
+        </li>
+        <li>
+        <li>
+          <a title="User" routerLink="/admin-user">
+            <i class="icon fa fa-user fa-2x" style="padding: 19px;" aria-hidden="true"></i> User
           </a>
         </li>
         <li>
@@ -58,7 +64,7 @@
     </section>
   </user>
 
-  <content class="elegant-color">
+  <content class="blue-grey darken-4" style="position: fixed; width: 100vw;">
     <logo>
       <a href="#">
         <img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" height="30" class="d-inline-block align-top" alt=""> 

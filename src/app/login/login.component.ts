@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ListApiService } from '../list-api/list-api.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+
 import { CookieService } from 'ngx-cookie-service';
+import { ListApiService } from '../service/list-api.service';
 import { DataUserService } from '../service/data-user.service';
+import { AlertPopupService } from '../service/alert-popup.service';
 
 @Component({
   selector: 'app-login',
@@ -23,10 +25,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private listApiService: ListApiService,
     private router: Router,
     private fb: FormBuilder,
-    private dataUserService: DataUserService) { }
+    private dataUserService: DataUserService,
+    private api: ListApiService,
+    private alertPopup: AlertPopupService
+  ) { }
 
   ngOnInit() {
     this.isDontHaveAccount = false;
@@ -50,7 +54,7 @@ export class LoginComponent implements OnInit {
   }
 
   cekLogin() {
-    this.listApiService.getCekLogin(this.loginForm.value).subscribe(data => {
+    this.api.getCekLogin(this.loginForm.value).subscribe(data => {
       this.dataUser = data;
       if (this.dataUser['status'] === 1) {
         this.cookieService.set('cIdUser', this.dataUser['data'][0]['id_user']);
@@ -64,15 +68,24 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    this.listApiService.postUser(this.registerForm.value).subscribe(data => {
+    this.api.postUser(this.registerForm.value).subscribe(data => {
       this.dataUser = data;
       console.log(this.dataUser);
       if (this.dataUser['status'] === 1) {
-        this.alertMessage('success', this.dataUser['message']);
-        this.router.navigate(['home']);
+        this.getId(this.registerForm.value);
       } else {
         this.alertMessage('error', this.dataUser['message']);
       }
+    });
+  }
+
+  getId(dataRegister: Object) {
+    this.api.getCekLogin(dataRegister).subscribe(data => {
+      this.dataUser = data;
+      this.cookieService.set('cIdUser', this.dataUser['data'][0]['id_user']);
+      this.dataUserService.setDataUser(this.dataUser['data'][0]);
+      this.alertMessage('success', this.dataUser['message']);
+      this.router.navigate(['home']);
     });
   }
 
@@ -87,30 +100,12 @@ export class LoginComponent implements OnInit {
   }
 
   alertMessage(mtype: any, mtitle: any) {
-    const toast = swal['mixin']({
-      toast: true,
-      position: 'bottom-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
-    toast({
-      type: mtype,
-      title: mtitle
-    });
+    this.alertPopup.alertMessage(mtype, mtitle);
   }
 
   alertMessageNull(mtype: any, mtitle: any) {
-    const toast = swal['mixin']({
-      toast: true,
-      position: 'bottom-end',
-      showConfirmButton: false,
-      animation: false,
-      timer: 500
-    });
-    toast({
-      type: mtype,
-      title: mtitle
-    });
+    this.alertPopup.alertMessageNull(mtype, mtitle);
   }
+
 
 }

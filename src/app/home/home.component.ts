@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ListApiService } from '../list-api/list-api.service';
 import { Router } from '@angular/router';
+
+import { ListApiService } from '../service/list-api.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private listApiService: ListApiService) {
+    private api: ListApiService) {
   }
 
   ngOnInit() {

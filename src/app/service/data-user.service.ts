@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ListApiService } from '../list-api/list-api.service';
+import { ListApiService } from './list-api.service';
 
 @Injectable()
 export class DataUserService {
@@ -8,7 +8,7 @@ export class DataUserService {
     dataUser: Object;
 
     constructor(
-        private listApiService: ListApiService,
+        private api: ListApiService,
         private cookieService: CookieService
     ) { }
 
@@ -18,7 +18,7 @@ export class DataUserService {
 
     cekDataUser() {
         if (this.dataUser == null) {
-          this.listApiService.getUserById(this.cookieService.get('cIdUser')).subscribe(data => {
+          this.api.getUserById(this.cookieService.get('cIdUser')).subscribe(data => {
             this.dataUser = data['data'][0];
             this.setDataUser(this.dataUser);
           });

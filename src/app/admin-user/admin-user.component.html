@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<main>
+  <div class="container-fluid">
+    <blockquote class="blockquote bq-primary">
+      <p class="bq-title">Data User</p>
+    </blockquote>
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Username</th>
+          <th>Name</th>
+          <th>Level</th>
+          <th>Photo</th>
+          <th>Create Date</th>
+          <th colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of dataUserAll['data']">
+          <th scope="row">1</th>
+          <td>{{data['username']}}</td>
+          <td>{{data['nama_user']}}</td>
+          <td>{{data['level']}}</td>
+          <td>{{data['photo']}}</td>
+          <td>{{data['create_date']}}</td>
+          <td><i class="fa fa-pencil" aria-hidden="true" mdbTooltip="Edit" placement="bottom"></i></td>
+          <td><i class="fa fa-trash" aria-hidden="true" mdbTooltip="Delete" placement="bottom"></i></td>
+        </tr>
+        <tr>
+          <th scope="row"></th>
+          <td>Total :</td>
+          <td colspan="6">{{dataUserAll['totalItems']}} Items</td>
+        </tr>
+      </tbody>
+    </table>
+              
+  </div>
+</main>

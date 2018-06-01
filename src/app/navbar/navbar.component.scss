@@ -1,4 +1,3 @@
-
 ul {
     list-style: none;
     padding: 0;
@@ -150,15 +149,18 @@ ul {
     padding-top: 58px;
     box-sizing: border-box;
     position: relative;
-    border-bottom: 1px solid #0062b3;
-    box-sizing: border-box;
+    z-index: 99999;
   }
   
   content logo {
     margin-top: -55px;
-    z-index: 9999999;
   }  
   
+  @media (max-width: 650px) {  
+    content logo {
+      margin-left: -40vw;
+    }
+  }
   /**
       SCROLLBAR STYLE FOR IE
   */
@@ -299,6 +301,7 @@ ul {
     position: fixed;
     top: 14px;
     left: 17px;
+    z-index: 999999;
   }
   
   

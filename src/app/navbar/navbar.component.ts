@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+
+import { CookieService } from 'ngx-cookie-service';
 import { DataUserService } from '../service/data-user.service';
-import { ListApiService } from '../list-api/list-api.service';
+import { ListApiService } from '../service/list-api.service';
+import { AlertPopupService } from '../service/alert-popup.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +22,8 @@ export class NavbarComponent implements OnInit {
     private _router: Router,
     private cookieService: CookieService,
     private dataUserService: DataUserService,
-    private api: ListApiService
+    private api: ListApiService,
+    private alertPopup: AlertPopupService
   ) { }
 
   ngOnInit() {
@@ -36,21 +39,8 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.cookieService.deleteAll();
-    this.alertMessage('info', 'You\'re Logout!');
+    this.alertPopup.alertMessage('info', 'You\'re Logout!');
     this.router.navigate(['login']);
-  }
-
-  alertMessage(mtype: any, mtitle: any) {
-    const toast = swal['mixin']({
-      toast: true,
-      position: 'bottom-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
-    toast({
-      type: mtype,
-      title: mtitle
-    });
   }
 
   createCookiesPage(page: string) {
