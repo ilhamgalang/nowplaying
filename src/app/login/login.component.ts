@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 
-import { CookieService } from 'ngx-cookie-service';
 import { ListApiService } from '../service/list-api.service';
 import { DataUserService } from '../service/data-user.service';
 import { AlertPopupService } from '../service/alert-popup.service';
@@ -24,7 +23,6 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(
-    private cookieService: CookieService,
     private router: Router,
     private fb: FormBuilder,
     private dataUserService: DataUserService,
@@ -57,7 +55,7 @@ export class LoginComponent implements OnInit {
     this.api.getCekLogin(this.loginForm.value).subscribe(data => {
       this.dataUser = data;
       if (this.dataUser['status'] === 1) {
-        this.cookieService.set('cIdUser', this.dataUser['data'][0]['id_user']);
+        localStorage.setItem('cIdUser', this.dataUser['data'][0]['id_user']);
         this.dataUserService.setDataUser(this.dataUser['data'][0]);
         this.router.navigate(['home']);
       } else {
@@ -82,7 +80,7 @@ export class LoginComponent implements OnInit {
   getId(dataRegister: Object) {
     this.api.getCekLogin(dataRegister).subscribe(data => {
       this.dataUser = data;
-      this.cookieService.set('cIdUser', this.dataUser['data'][0]['id_user']);
+      localStorage.setItem('cIdUser', this.dataUser['data'][0]['id_user']);
       this.dataUserService.setDataUser(this.dataUser['data'][0]);
       this.alertMessage('success', this.dataUser['message']);
       this.router.navigate(['home']);

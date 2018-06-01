@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +9,20 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent implements OnInit {
   title = 'Now Playing';
   constructor(
-    private cookieService: CookieService,
     private router: Router
   ) {
   }
 
   ngOnInit() {
-    if (this.cookieService.check('cIdUser')) {
-      this.router.navigate([this.cookieService.get('cCurrentPath')]);
+    if (typeof(Storage) !== undefined) {
+      console.log('Code for localStorage/sessionStorage.');
+      if (localStorage.getItem('cIdUser') !== null) {
+        this.router.navigate([localStorage.getItem('cCurrentPath')]);
+      } else {
+        this.router.navigate(['login']);
+      }
     } else {
-      this.router.navigate(['login']);
+      console.log('Sorry! No Web Storage support..');
     }
-  }
+ }
 }

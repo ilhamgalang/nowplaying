@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CookieService } from 'ngx-cookie-service';
 
 import { ListApiService } from './service/list-api.service';
 import { DataUserService } from './service/data-user.service';
@@ -43,7 +42,7 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
   NgbModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ListApiService, CookieService, DataUserService, AlertPopupService],
+  providers: [ListApiService, DataUserService, AlertPopupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
