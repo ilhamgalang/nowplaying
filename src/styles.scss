@@ -2,16 +2,20 @@
 .show {
     display: block;
 }
-
 .hide {
     display: none;
 }
 main {
     padding-top: 70px;
 }
-
+.modal {
+    margin-top: 70px;
+}
 @media (min-width: 650px) {
     main {
         margin-left: 60px;
+    }
+    .modal {
+        margin-top: 0px;
     }
 }

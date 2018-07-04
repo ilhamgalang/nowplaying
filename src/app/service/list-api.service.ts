@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+
+const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/x-www-form-urlencoded'
+    })
+  };
 
 @Injectable()
 export class ListApiService {
@@ -9,8 +15,22 @@ export class ListApiService {
 
     constructor(private http: HttpClient) { }
 
-    getUser(): Observable<any> {
-        return this.http.get(this.API + 'user/read');
+    getData(table: string): Observable<any> {
+        let result: Observable<Object>;
+            result = this.http.get(this.API + table + '/read');
+        return result;
+    }
+
+    postData(table: string, data: Object): Observable<any> {
+        let result: Observable<Object>;
+            result = this.http.post(this.API + table + '/create', data);
+        return result;
+    }
+
+    deleteData(table: string, id: string): Observable<any> {
+        let result: Observable<Object>;
+            result = this.http.delete(this.API + table + '/delete/' + id, httpOptions);
+        return result;
     }
 
     getUserById(id: string): Observable<any> {

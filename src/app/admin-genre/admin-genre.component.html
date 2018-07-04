@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<main>
+  <div class="container-fluid">
+    <blockquote class="blockquote bq-primary">
+      <p class="bq-title">Data Genre</p>
+    </blockquote>
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Id Genre</th>
+          <th>Genre</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of dataGenreAll['data']">
+          <th scope="row">1</th>
+          <td>{{data['id_genre']}}</td>
+          <td>{{data['genre']}}</td>
+          <td>
+              <button type="button" class="btn btn-info btn-sm waves-light" (click)="editData.show()" mdbTooltip="Edit" placement="bottom" mdbWavesEffect><i class="fa fa-pencil" aria-hidden="true"></i></button>
+              <button type="button" class="btn btn-danger btn-sm waves-light" (click)="cekDeleteDataGenre(data['id_genre'])" mdbTooltip="Delete" placement="bottom" mdbWavesEffect><i class="fa fa-trash" aria-hidden="true"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row"></th>
+          <td>Total :</td>
+          <td colspan="2">{{dataGenreAll['totalItems']}} Items</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <button type="button" class="btn btn-success waves-light" (click)="addData.show()" mdbWavesEffect><i class="fa fa-plus mr-1" aria-hidden="true"></i>Add Genre</button>
+     
+    <!--Modal: Contact form-->
+    <div mdbModal #addData="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header light-blue darken-3 white-text">
+                    <h4 class="title"><i class="fa fa-pencil"></i> Add Genre</h4>
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="addData.hide()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body mb-0">
+                    <form [formGroup]="addForm" (ngSubmit)="addForm.controls['genre'].errors?.required ? alertMessage('error', 'Genre Can\'t Empty') : addDataGenre() ">
+                        <div class="md-form form-sm">
+                            <input mdbInputDirective type="text" id="genre" class="form-control" formControlName="genre">
+                            <label for="genre">Genre</label>
+                        </div>
+                        <div class="text-center mt-1-half">
+                            <button type="submit" class="btn btn-info mb-2 waves-light" mdbWavesEffect>Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: Contact form-->
+    
+    <!--Modal: Contact form-->
+    <div mdbModal #editData="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header light-blue darken-3 white-text">
+                    <h4 class="title"><i class="fa fa-pencil"></i> Edit Genre</h4>
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="editData.hide()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body mb-0">
+                    <form [formGroup]="editForm" (ngSubmit)="editForm.controls['genre'].errors?.required ? alertMessage('error', 'Genre Can\'t Empty') : addDataGenre() ">
+                        <div class="md-form form-sm">
+                            <input mdbInputDirective type="text" id="edit-genre" class="form-control" formControlName="genre" value="asdad">
+                            <label for="edit-genre">Genre</label>
+                        </div>
+                        <div class="text-center mt-1-half">
+                            <button type="submit" class="btn btn-info mb-2 waves-light" mdbWavesEffect>Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: Contact form-->
+                          
+  </div>
+</main>
