@@ -27,6 +27,12 @@ export class ListApiService {
         return result;
     }
 
+    putData(table: string, data: Object): Observable<any> {
+        let result: Observable<Object>;
+            result = this.http.put(this.API + table + '/update', data);
+        return result;
+    }
+
     deleteData(table: string, id: string): Observable<any> {
         let result: Observable<Object>;
             result = this.http.delete(this.API + table + '/delete/' + id, httpOptions);

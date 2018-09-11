@@ -13,6 +13,8 @@ import swal from 'sweetalert2';
 export class AdminGenreComponent implements OnInit {
 
   dataGenreAll: Object;
+  idGenre: any;
+  nmGenre: any;
   addForm: FormGroup;
   editForm: FormGroup;
 
@@ -28,6 +30,7 @@ export class AdminGenreComponent implements OnInit {
       genre: ['', Validators.required]
     });
     this.editForm = this.fb.group({
+      id_genre: ['', Validators.required],
       genre: ['', Validators.required]
     });
   }
@@ -69,6 +72,22 @@ export class AdminGenreComponent implements OnInit {
         this.alertMessage('error', data['message']);
       }
     });
+  }
+
+ updateDataGenre() {
+    this.api.putData('genre', this.editForm.value).subscribe(data => {
+      if (data['status'] === 1) {
+        this.alertMessage('success', data['message']);
+        this.getDataGenre();
+      } else {
+        this.alertMessage('error', data['message']);
+      }
+    });
+  }
+
+  setDataEdit(idGenre: any, nmGenre: any) {
+    this.idGenre = idGenre;
+    this.nmGenre = nmGenre;
   }
 
   alertMessage(mtype: any, mtitle: any) {

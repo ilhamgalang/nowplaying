@@ -14,12 +14,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of dataGenreAll['data']">
-          <th scope="row">1</th>
+        <tr *ngFor="let data of dataGenreAll['data']; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
           <td>{{data['id_genre']}}</td>
           <td>{{data['genre']}}</td>
           <td>
-              <button type="button" class="btn btn-info btn-sm waves-light" (click)="editData.show()" mdbTooltip="Edit" placement="bottom" mdbWavesEffect><i class="fa fa-pencil" aria-hidden="true"></i></button>
+              <button type="button" class="btn btn-info btn-sm waves-light" (onShown)="setDataEdit(data['id_genre'], data['genre'])" (click)="editData.show()" mdbTooltip="Edit" placement="bottom" mdbWavesEffect><i class="fa fa-pencil" aria-hidden="true"></i></button>
               <button type="button" class="btn btn-danger btn-sm waves-light" (click)="cekDeleteDataGenre(data['id_genre'])" mdbTooltip="Delete" placement="bottom" mdbWavesEffect><i class="fa fa-trash" aria-hidden="true"></i></button>
           </td>
         </tr>
@@ -79,9 +79,13 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body mb-0">
-                    <form [formGroup]="editForm" (ngSubmit)="editForm.controls['genre'].errors?.required ? alertMessage('error', 'Genre Can\'t Empty') : addDataGenre() ">
+                    <form [formGroup]="editForm" (ngSubmit)="editForm.controls['genre'].errors?.required ? alertMessage('error', 'Genre Can\'t Empty') : updateDataGenre() ">
                         <div class="md-form form-sm">
-                            <input mdbInputDirective type="text" id="edit-genre" class="form-control" formControlName="genre" value="asdad">
+                            <input mdbInputDirective type="text" id="edit-id-genre" class="form-control" formControlName="id_genre" [(ngModel)]="idGenre" disabled>
+                            <label for="edit-id-genre">ID Genre</label>
+                        </div>
+                        <div class="md-form form-sm">
+                            <input mdbInputDirective type="text" id="edit-genre" class="form-control" formControlName="genre" [(ngModel)]="nmGenre">
                             <label for="edit-genre">Genre</label>
                         </div>
                         <div class="text-center mt-1-half">
